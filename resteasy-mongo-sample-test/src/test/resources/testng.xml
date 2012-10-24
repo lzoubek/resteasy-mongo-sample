@@ -1,0 +1,8 @@
+<suite name="movie-library REST Test">
+  	
+  	 <test name="Test1">
+  	  	<classes>
+			<class name="com.github.resteasy.mongo.sample.test.Test1" />
+		</classes>
+  	</test>
+</suite>

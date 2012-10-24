@@ -1,0 +1,57 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "maven"
+apply plugin: "groovy"
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+group = "com.github"
+version = "1.0.0-SNAPSHOT"
+
+eclipse {
+  classpath {
+    defaultOutputDir = file("bin")
+  }
+}
+
+repositories {
+  mavenCentral()
+    mavenLocal()
+    [
+    "https://repository.jboss.org/nexus/content/repositories/thirdparty-uploads",
+    "http://clojars.org/repo",
+    "http://download.java.net/maven/2/",
+    "http://repository.codehaus.org",
+    "http://snapshots.repository.codehaus.org"
+      ].each { repo ->  
+        maven {
+          url repo
+        }
+      }
+}
+test {
+  useTestNG()
+    systemProperties = System.properties
+    if ( systemProperties["testng.suite"] ) {
+      options.suites(systemProperties["testng.suite"])
+    } 
+    else {
+      options.suites("src/test/resources/testng.xml")
+    }
+  options {
+    listeners << "org.uncommons.reportng.HTMLReporter"
+      listeners << "org.uncommons.reportng.JUnitXMLReporter"
+  }
+  scanForTestClasses = false;
+  workingDir = "build"
+    ignoreFailures = true;
+  testLogging.showStandardStreams = true
+}
+dependencies {
+  groovy localGroovy()
+    groovy group: "org.codehaus.groovy.modules.http-builder", name:"http-builder", version:"0.5.2",
+           "org.testng:testng:6.5.1",
+           "com.google.inject:guice:3.0"
+
+             testCompile  "org.uncommons:reportng:1.1.3"
+}
+
