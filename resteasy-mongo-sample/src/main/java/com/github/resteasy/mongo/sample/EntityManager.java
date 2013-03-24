@@ -20,10 +20,10 @@ public class EntityManager {
 
 	public EntityManager() {
 
-		String host = System.getenv("OPENSHIFT_NOSQL_DB_HOST");
-		String port = System.getenv("OPENSHIFT_NOSQL_DB_PORT");
-		String username = System.getenv("OPENSHIFT_NOSQL_DB_USERNAME");
-		String password = System.getenv("OPENSHIFT_NOSQL_DB_PASSWORD");
+		String host = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
+		String port = System.getenv("OPENSHIFT_MONGODB_DB_PORT");
+		String username = "";
+		String password = "";
 		String db = System.getenv("OPENSHIFT_APP_NAME");
 		
 		try {			
